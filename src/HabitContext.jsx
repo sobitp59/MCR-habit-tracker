@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const HabitContext = createContext()
 
@@ -35,8 +36,9 @@ const HabitContextProvider = ({children}) => {
     }
 
     const handleFormSubmit = (e) => {
+        console.log(uuidv4());
         e.preventDefault();
-        setHabits((prev) => [...prev, habitDetails]);
+        setHabits((prev) => [...prev, {...habitDetails, id : uuidv4()}]);
     }
 
     const value = {

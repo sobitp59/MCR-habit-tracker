@@ -1,6 +1,9 @@
-import { useHabitContext } from "./HabitContext"
+import { Link, useParams } from "react-router-dom";
+import { useHabitContext } from "./HabitContext";
 
 const Home = () => {
+  const {habitID} = useParams();
+
   const {habits, habitDetails} = useHabitContext()
   console.log(habits)
   console.log(habitDetails)
@@ -11,8 +14,12 @@ const Home = () => {
       {/* <p>{habitDetails?.habitName}</p> */}
       <ul>
         {habits?.length > 0 && (
-          habits?.map(({habitName}, index) => {
-            return <li key={index}>{habitName}</li>
+          habits?.map(({habitName, id}) => {
+            return <li key={id}>
+                  <Link to={`/habit/${id}`}>
+                    <h1>{habitName}</h1>
+                  </Link>
+              </li>
           })
         )}
       </ul>
