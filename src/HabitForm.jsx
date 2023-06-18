@@ -1,7 +1,14 @@
 import { useHabitContext } from "./HabitContext"
 
-const HabitForm = () => {
+const HabitForm = ({showForm, setShowForm}) => {
     const {handleHabitChange, handleHabitRepeatChange, handleHabitGoalChange, handleHabitTimeChange, handleHabitStartDateChange, handleFormSubmit} = useHabitContext()
+
+    const handleDiscardHabit = () => {
+        if(showForm){
+            setShowForm(false)
+        }
+    }
+
   return (
     <div>
         <h2>new habit</h2>
@@ -50,7 +57,7 @@ const HabitForm = () => {
         </form>
         <div>
             <button onClick={handleFormSubmit}>save</button>
-            <button>discard</button>
+            <button onClick={handleDiscardHabit}>discard</button>
         </div>
     </div>
   )

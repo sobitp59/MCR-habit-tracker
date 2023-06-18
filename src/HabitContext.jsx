@@ -5,6 +5,7 @@ const HabitContext = createContext()
 
 const HabitContextProvider = ({children}) => {
     const [habits, setHabits] = useState([]);
+    const [archiveHabits, setArchiveHabits] = useState([]);
     
     const [habitDetails, setHabitDetails] = useState({
         habitName : 'habit name',
@@ -39,6 +40,18 @@ const HabitContextProvider = ({children}) => {
         console.log(uuidv4());
         e.preventDefault();
         setHabits((prev) => [...prev, {...habitDetails, id : uuidv4()}]);
+        setHabitDetails({
+            habitName : 'habit name',
+            habitRepeat : 'daily',
+            habitGoal : '1 times daily',
+            habitTime : 'any time',
+            habitStartDate : 'today',
+        })
+    }
+
+    const archiveHabitHandler = (habitId) => {
+        const archivedHabit = [...habits]?.find(({id}) => id === habitId)
+        setArchiveHabits((prev) => [...prev, archivedHabit])
     }
 
     const value = {
@@ -49,7 +62,9 @@ const HabitContextProvider = ({children}) => {
         handleHabitGoalChange,
         handleHabitTimeChange,        
         handleHabitStartDateChange,
-        handleFormSubmit
+        handleFormSubmit,
+        archiveHabitHandler,
+        archiveHabits
     }
 
     return(

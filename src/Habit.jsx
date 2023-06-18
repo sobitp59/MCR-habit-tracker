@@ -10,7 +10,7 @@ const Habit = () => {
   return (
     <div>
         <button onClick={() => setShowForm(true)}>+ create a habit</button>
-        {showForm && <HabitForm/> }
+        {showForm && <HabitForm showForm={showForm} setShowForm={setShowForm}/> }
     </div>
   )
 }
